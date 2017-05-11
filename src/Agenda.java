@@ -8,6 +8,7 @@ public class Agenda {
 	String telefono = "";
 	String email = "";
 	String fechaNacimiento = "";
+	private int posicion;
 	
 	public Agenda(){
 		
@@ -29,22 +30,33 @@ public class Agenda {
 	ArrayList<Agenda> agendaContactos = new ArrayList<Agenda>();
 	//Agenda auxiliar de contactos
 	ArrayList<Agenda> agendaContactoAux = new ArrayList<Agenda>();
+	//ArrayList de posiciones
+	ArrayList<Integer> posicionList = new ArrayList<Integer>();
 	
-	public void buscarContacto(){
+	
+	
+	
+	//Este metodo Busca contactos dentro del arraylist agendaContactos y los que coinciden los mete en un arraylist de objetos auxiliar
+	public int buscarContacto(){
 		
-		//Este metodo Busca contactos dentro del arraylist agendaContactos
-		
+		agendaContactoAux.clear();
+			
 		String buscarNombre = "";
 		String contestacion = "";
 		int posicion = 0;
+		Integer posicionAuto = 0;
 		
 		System.out.println("¿Que contacto necesitas? (nombre)");
 		buscarNombre = Entrada.cadena();
 				
+		System.out.println("Contacto/s encontrado/s en las posición/posiciones: ");
 		for (int i = 0; i < agendaContactos.size(); i++) {
 			
 			if (agendaContactos.get(i).nombre.equals(buscarNombre)) {
-				
+			
+				System.out.println("Posición: " + (i+1));
+				i = posicionAuto;
+				posicionList.add(posicionAuto);
 				agendaContactoAux.add(new Agenda(agendaContactos.get(i).nombre, agendaContactos.get(i).apellido1, agendaContactos.get(i).apellido2, agendaContactos.get(i).telefono, agendaContactos.get(i).email, agendaContactos.get(i).fechaNacimiento));
 				
 			}	
@@ -87,14 +99,13 @@ public class Agenda {
 			System.out.println("Fecha de nacimiento: " + agendaContactoAux.get(posicion-1).fechaNacimiento);
 
 		}
-
-		agendaContactoAux.clear();
+		return posicion;
 		
 		//Aquí volvería a la clase asistente
 			
 	}
 	
-	
+	//Este metodo añade un contacto en el arraylist agendaContactos en forma de objeto
 	public String anadirContacto(){
 		
 		//Este metodo añadrirá contactos a un array de objetos.
@@ -119,28 +130,17 @@ public class Agenda {
 		
 	}
 	
+	//Se podrá modificar un contacto que esté metido en el arraylist agenda contactos
 	public String modificarContacto(){
 		
-		// Modifica el contacto que elegimos
-		
-		String modNombre = "";
-		String newNombre = "";
+		// Buscamos el contacto que queremos modificar
 		String contestacion = "";
-		boolean encontrado = false;
-		boolean nuevoCont = false;
 		
-		System.out.println("¿Qué contacto quieres modificar? Escriba su nombre: ");
-		modNombre = Entrada.cadena();
-		
-		for (int i = 0; i < agendaContactos.size(); i++) {
-		
-			agendaContactos.get(i).nombre.equals(modNombre); 
-				
-		}		
+		buscarContacto();		
 		
 		for (int i = 0; i < agendaContactos.size(); i++) {
 			
-			System.out.println("Introduzca el nuevo nombre");
+			System.out.println("Introduzca el nuevo nombre de " + agendaContactoAux.get(posicion-1).nombre );
 			agendaContactos.get(i).nombre = Entrada.cadena();
 			System.out.println("Introduzca el nuevo primer apellido");
 			agendaContactos.get(i).apellido1 = Entrada.cadena();
@@ -152,8 +152,6 @@ public class Agenda {
 			agendaContactos.get(i).nombre = Entrada.cadena();
 			
 		}
-		
-		
 		
 		
 			System.out.println("No lo he encontrado en la agenda de contactos... ¿Desea introducir un nuevo contacto? (Si, No)");
