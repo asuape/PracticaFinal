@@ -126,8 +126,7 @@ public class Agenda {
 		
 	//Se podrá modificar un contacto que esté metido en el arraylist agenda contactos
 	public String modificarContacto(){
-		
-		
+		//Almacenamos la contestación
 		String contestacion = "";
 		
 		//Buscamos el contacto que queremos modificar
@@ -175,7 +174,7 @@ public class Agenda {
 	}
 	
 	//Este metodo añade un contacto en el arraylist agendaContactos en forma de objeto
-		public static String anadirContacto(ArrayList<Agenda> agendaContactos){
+	public static String anadirContacto(ArrayList<Agenda> agendaContactos){
 			
 			//Este metodo añadrirá contactos a un array de objetos.
 			
@@ -202,7 +201,7 @@ public class Agenda {
 		}
 		
 		//Este metodo elimina un objeto en la lista de agenda Contactos
-		public String eliminarContacto(){
+	public String eliminarContacto(){
 			
 			//Se busca un contacto el buscarContacto(), 
 			buscarContacto(agendaContactos,agendaContactoAux,posicionList);
@@ -218,11 +217,11 @@ public class Agenda {
 				
 			} 
 			
-			return apellido1;
+			return "(!)Contacto eliminado(!)";
 			
 		}
 		
-		public static  int buscarNumero(ArrayList<Agenda> agendaContactos,ArrayList<Agenda> agendaContactoAux,ArrayList<Integer> posicionList){
+	public static  int buscarNumero(ArrayList<Agenda> agendaContactos,ArrayList<Agenda> agendaContactoAux,ArrayList<Integer> posicionList){
 			//Limpia ArrayList cada vez que se utiliza al inicio.
 			agendaContactoAux.clear();
 				
