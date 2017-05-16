@@ -87,8 +87,28 @@ public class Agenda {
 			}
 			
 			//Una vez mostrada la lista, la persona selecciona un númeor de la lista (Se le resta uno poque se visualiza desde 1 pero el array se guarda desde 0)
-			System.out.println("Seleccione el número de la lista. (1, 2, 3...)");
-			posicion = Entrada.entero();
+			try {
+				
+			} catch (NumberFormatException NFE) {
+				
+				
+			}
+			
+			int limite = 1;
+			int contador = 0;
+			
+			while(limite!=contador){
+				try {
+					System.out.println("Seleccione el número de la lista. (1, 2, 3...)");
+					posicion = Entrada.entero();			
+					
+				} catch (NumberFormatException n) {
+					System.out.println("No has introducido un número. Seleccione el número de la lista. (1, 2, 3...)");
+					posicion = Entrada.entero();
+				}
+				contador++;
+			}
+			
 			
 			//Se muestra el contacto con dicha posición
 			System.out.println("Contacto " + posicion + "completo de " + agendaContactoAux.get(posicion-1).nombre );
@@ -201,5 +221,95 @@ public class Agenda {
 			return apellido1;
 			
 		}
+		
+		public static  int buscarNumero(ArrayList<Agenda> agendaContactos,ArrayList<Agenda> agendaContactoAux,ArrayList<Integer> posicionList){
+			//Limpia ArrayList cada vez que se utiliza al inicio.
+			agendaContactoAux.clear();
+				
+			String buscarTelefono = "";
+			String contestacion = "";
+			int posicion = 0;
+			Integer posicionAuto = 0;
+			
+			//Nombre que se comparará
+			System.out.println("¿Que contacto necesitas? (nombre)");
+			buscarTelefono = Entrada.cadena();
+			
+			//Se recorre el ArrayList y se compara el nombre introducido con la agenda de contactos auxiliar (ArrayList agendaContactosAux)
+			System.out.println("Contacto/s encontrado/s en las posición/posiciones: ");
+			for (int i = 0; i < agendaContactos.size(); i++) {
+				
+				if (agendaContactos.get(i).telefono.equals(buscarTelefono)) {
+				
+					System.out.println("Posición: " + (i+1));
+					i = posicionAuto;
+					posicionList.add(posicionAuto);
+					agendaContactoAux.add(new Agenda(agendaContactos.get(i).nombre, agendaContactos.get(i).apellido1, agendaContactos.get(i).apellido2, agendaContactos.get(i).telefono, agendaContactos.get(i).email, agendaContactos.get(i).fechaNacimiento));
+					
+				}	
+			}
+			
+			//Si la agenda de contactos auxiliar está vacía, le pregunta si quiere añadir nuevos contactos.
+			if (agendaContactoAux.size() == 0) {
+				
+				System.out.println("No he encontrado el contacto. ¿Desea introducirlo?");
+				contestacion = Entrada.cadena();
+				
+				if (contestacion.equals("Si") || contestacion.equals("Sí") || contestacion.equals("SI") || contestacion.equals("SÍ") || contestacion.equals("si") ||contestacion.equals("Sí")) {
+												
+					anadirContacto(agendaContactos);
+					
+				} else if (contestacion.equals("No") || contestacion.equals("NO") || contestacion.equals("no")) {
+					
+					//Aquí volvería a la clase asistente
+				}
+			//Si la agenda de contactos auxiliar contiene algún objeto contacto, se recorre y se muestran los que coinciden 	
+			} else if (agendaContactoAux.size() > 0) {
+				
+				//Mostramos todos los contactos que coinciden
 
+				for (int i = 0; i < agendaContactoAux.size(); i++) {
+					
+					System.out.println("----------------------");
+					System.out.println("Contacto" + (i+1)+ ":");
+					System.out.println("Nombre:" + agendaContactoAux.get(i).nombre);
+					System.out.println("Apellidos:" + agendaContactoAux.get(i).apellido1 + agendaContactoAux.get(i).apellido2);			
+				}
+				
+				//Una vez mostrada la lista, la persona selecciona un númeor de la lista (Se le resta uno poque se visualiza desde 1 pero el array se guarda desde 0)
+				try {
+					
+				} catch (NumberFormatException NFE) {
+					
+					
+				}
+				
+				int limite = 1;
+				int contador = 0;
+				
+				while(limite!=contador){
+					try {
+						System.out.println("Seleccione el número de la lista. (1, 2, 3...)");
+						posicion = Entrada.entero();			
+						
+					} catch (NumberFormatException n) {
+						System.out.println("No has introducido un número. Seleccione el número de la lista. (1, 2, 3...)");
+						posicion = Entrada.entero();
+					}
+					contador++;
+				}
+				
+				
+				//Se muestra el contacto con dicha posición
+				System.out.println("Contacto " + posicion + "completo de " + agendaContactoAux.get(posicion-1).nombre );
+				System.out.println("Nombre:" + agendaContactoAux.get(posicion-1).nombre);
+				System.out.println("Apellidos:" + agendaContactoAux.get(posicion-1).apellido1 + agendaContactoAux.get(posicion-1).apellido2);
+				System.out.println("Telefono: " + agendaContactoAux.get(posicion-1).telefono);
+				System.out.println("Correo electrónico: " + agendaContactoAux.get(posicion-1).email);
+				System.out.println("Fecha de nacimiento: " + agendaContactoAux.get(posicion-1).fechaNacimiento);
+
+			}
+			//Devuelve la posición+1 del contacto encontrado en la agenda de contactos auxiliar
+			return posicion;
+		}
 }

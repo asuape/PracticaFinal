@@ -2,11 +2,8 @@ import java.util.ArrayList;
 
 public class Llamada {
 	
-	String nombre = "";
-	String apellido1= "";
-	String apellido2= "";
+	String nombre, apellido1, apellido2, date;
 	int telefono= 0;
-	String date;
 	
 	ArrayList<Llamada> registroLlamadas = new ArrayList<Llamada>();
 	
@@ -21,30 +18,31 @@ public class Llamada {
 		date=this.date;
 		
 	}
-	
+	//Este metodo busca un contacto para compararlo con el que se escribe
 	public String llamarContacto(){
-		
+		//Usa el metodo buscar contacto
 		Agenda.buscarContacto(Agenda.agendaContactos, Agenda.agendaContactoAux, Agenda.posicionList);
-		
+		//Recorremos la agenda de contactos
 		for (int i = 0; i < Agenda.agendaContactos.size(); i++) {
-
+		//Comparamos el los nombres de la agenda con los que han coincidido con la busqueda
 			if (Agenda.agendaContactos.get(i).nombre.equals(Agenda.agendaContactoAux.get(Agenda.posicion-1).nombre) & Agenda.agendaContactos.get(i).apellido1.equals(Agenda.agendaContactoAux.get(Agenda.posicion-1).apellido1)){
-			
+		//Se realiza la "llamada" y se almacena un registro de ella.	
 				System.out.println("Llamando a " + Agenda.nombre + " al " + Agenda.telefono);
 				registroLlamadas.add(new Llamada(nombre, apellido1,apellido2, telefono, date));
-				
+		
 			} else {
 				System.out.println("Contacto desconocido");
 			}
 			
-			
+		//Devolvemos texto de finalizacion de llamada	
 		}
 		return "Llamada a " + Agenda.nombre + " finalizada";
 	}
 	
+	//Este metodo es igual que el anterior pero hace una comparación (llamar contacto) con un número de telefono
 	public String llamarNumero(){
-		
-		Agenda.buscarContacto(Agenda.agendaContactos, Agenda.agendaContactoAux, Agenda.posicionList);
+		//Busca un número para compararlo despues
+		Agenda.buscarNumero(Agenda.agendaContactos, Agenda.agendaContactoAux, Agenda.posicionList);
 		
 		for (int i = 0; i < Agenda.agendaContactos.size(); i++) {
 
@@ -61,12 +59,12 @@ public class Llamada {
 		}
 		return "Llamada a " + Agenda.nombre + " finalizada";
 	}
-	
+	//Mostramos el registro de llamadas
 	public String mostrarRegistro(ArrayList<Llamada> registroLlamadas){
 		
 		//Recorremos el arrayList del registro de llamadas para mostrarlo
 		for (int i = 0; i < registroLlamadas.size(); i++) {
-			
+		//Lo mostrasmos
 			System.out.println("-----------------");
 			System.out.println("Registro " + (i+1));
 			System.out.println("Contacto: " + registroLlamadas.get(i).nombre + registroLlamadas.get(i).apellido1 + registroLlamadas.get(i).apellido2);
@@ -78,7 +76,7 @@ public class Llamada {
 		return "Fin del registro.";
 		
 	}
-	
+	//Con este metodo se borra el registro de llamadas
 	public String borrarRegistro(ArrayList<Llamada> registroLlamadas) {
 		
 		registroLlamadas.clear();
