@@ -2,10 +2,13 @@ import java.util.ArrayList;
 
 public class Llamada {
 	
-	String nombre, apellido1, apellido2, date;
-	int telefono= 0;
+	static String nombre;
+	static String apellido1;
+	static String apellido2;
+	static String date;
+	static int telefono= 0;
 	
-	ArrayList<Llamada> registroLlamadas = new ArrayList<Llamada>();
+	static ArrayList<Llamada> registroLlamadas = new ArrayList<Llamada>();
 	
 	public Llamada() {}
 	
@@ -19,7 +22,7 @@ public class Llamada {
 		
 	}
 	//Este metodo busca un contacto para compararlo con el que se escribe
-	public String llamarContacto(){
+	public static String llamarContacto(){
 		//Usa el metodo buscar contacto
 		Agenda.buscarContacto(Agenda.agendaContactos, Agenda.agendaContactoAux, Agenda.posicionList);
 		//Recorremos la agenda de contactos
@@ -32,6 +35,7 @@ public class Llamada {
 		
 			} else {
 				System.out.println("Contacto desconocido");
+				//Aquí volvería al MAIN
 			}
 			
 		//Devolvemos texto de finalizacion de llamada	
@@ -40,7 +44,7 @@ public class Llamada {
 	}
 	
 	//Este metodo es igual que el anterior pero hace una comparación (llamar contacto) con un número de telefono
-	public String llamarNumero(){
+	public static String llamarNumero(){
 		//Busca un número para compararlo despues
 		Agenda.buscarNumero(Agenda.agendaContactos, Agenda.agendaContactoAux, Agenda.posicionList);
 		
@@ -53,6 +57,7 @@ public class Llamada {
 				
 			} else {
 				System.out.println("Numero desconocido");
+				//Aquí volvería al MAIN
 			}
 			
 			
@@ -60,7 +65,7 @@ public class Llamada {
 		return "Llamada a " + Agenda.nombre + " finalizada";
 	}
 	//Mostramos el registro de llamadas
-	public String mostrarRegistro(ArrayList<Llamada> registroLlamadas){
+	public static String mostrarRegistro(ArrayList<Llamada> registroLlamadas){
 		
 		//Recorremos el arrayList del registro de llamadas para mostrarlo
 		for (int i = 0; i < registroLlamadas.size(); i++) {
@@ -77,7 +82,7 @@ public class Llamada {
 		
 	}
 	//Con este metodo se borra el registro de llamadas
-	public String borrarRegistro(ArrayList<Llamada> registroLlamadas) {
+	public static String borrarRegistro(ArrayList<Llamada> registroLlamadas) {
 		
 		registroLlamadas.clear();
 		

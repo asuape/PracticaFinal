@@ -71,7 +71,7 @@ public class Agenda {
 				
 			} else if (contestacion.equals("No") || contestacion.equals("NO") || contestacion.equals("no")) {
 				
-				//Aquí volvería a la clase asistente
+				System.out.println("De acuerdo.");
 			}
 		//Si la agenda de contactos auxiliar contiene algún objeto contacto, se recorre y se muestran los que coinciden 	
 		} else if (agendaContactoAux.size() > 0) {
@@ -83,7 +83,7 @@ public class Agenda {
 				System.out.println("----------------------");
 				System.out.println("Contacto" + (i+1)+ ":");
 				System.out.println("Nombre:" + agendaContactoAux.get(i).nombre);
-				System.out.println("Apellidos:" + agendaContactoAux.get(i).apellido1 + agendaContactoAux.get(i).apellido2);			
+				System.out.println("Apellidos:" + agendaContactoAux.get(i).apellido1 + " " + agendaContactoAux.get(i).apellido2);			
 			}
 			
 			//Una vez mostrada la lista, la persona selecciona un númeor de la lista (Se le resta uno poque se visualiza desde 1 pero el array se guarda desde 0)
@@ -125,7 +125,7 @@ public class Agenda {
 	}
 		
 	//Se podrá modificar un contacto que esté metido en el arraylist agenda contactos
-	public String modificarContacto(){
+	public static String modificarContacto(){
 		//Almacenamos la contestación
 		String contestacion = "";
 		
@@ -201,8 +201,9 @@ public class Agenda {
 		}
 		
 		//Este metodo elimina un objeto en la lista de agenda Contactos
-	public String eliminarContacto(){
+	public static String eliminarContacto(){
 			
+			System.out.println("Busque y seleccione el contacto para eliminarlo:");
 			//Se busca un contacto el buscarContacto(), 
 			buscarContacto(agendaContactos,agendaContactoAux,posicionList);
 			

@@ -2,9 +2,17 @@ import java.util.ArrayList;
 
 public class Correo {
 
-	String nombre, apellido1, apellido2, date, email, asunto, mensaje;
+	String nombre, apellido1, apellido2;
+
+	static String date;
+
+	String email;
+
+	String asunto;
+
+	String mensaje;
 	
-	ArrayList<Correo> bandejaSalida = new ArrayList<Correo>();
+	static ArrayList<Correo> bandejaSalida = new ArrayList<Correo>();
 	
 	public Correo(){
 		
@@ -23,7 +31,7 @@ public class Correo {
 	}
 
 	//Este metodo envía un correo electrónico 
-	public String enviarCorreo(){
+	public static String enviarCorreo(){
 		
 		String asunto;
 		String mensaje;
@@ -57,24 +65,46 @@ public class Correo {
 		
 	}
 	
-	public String mostrarCorreos() {
+	public static String verCorreos(ArrayList<Correo> bandejaSalida) {
 		
 		for (int i = 0; i < bandejaSalida.size(); i++) {
 			
-			System.out.println("-----------------");
-			System.out.println("Correo " + (i+1));
-			System.out.println("Contacto: " + bandejaSalida.get(i).nombre + " " + bandejaSalida.get(i).apellido1 + " " + bandejaSalida.get(i).apellido2 + "(" + bandejaSalida.get(i).email + ")");
-			System.out.println("Asunto: " + bandejaSalida.get(i).asunto);
-			System.out.println("-----------------");
-			System.out.println("Mensaje: ");
-			System.out.println(bandejaSalida.get(i).mensaje);
-			System.out.println("-----------------");
+			if (bandejaSalida.size() > 0) {
+				
+				System.out.println("-----------------");
+				System.out.println("Correo " + (i+1));
+				System.out.println("Destinatario: " + bandejaSalida.get(i).nombre + " " + bandejaSalida.get(i).apellido1 + " " + bandejaSalida.get(i).apellido2 + "(" + bandejaSalida.get(i).email + ")");
+				System.out.println("Asunto: " + bandejaSalida.get(i).asunto);
+				System.out.println("-----------------");
+				System.out.println("Mensaje: ");
+				System.out.println(bandejaSalida.get(i).mensaje);
+				System.out.println("-----------------");
+				
+			} else {
+
+				String contestacion;
+				
+				System.out.println("No hay correos, labandeja de salida está vacia.");
+				System.out.println("¿Desea escribir un correo nuevo?");
+				contestacion = Entrada.cadena();
+				
+				if (contestacion.equals("Si") || contestacion.equals("Sí") || contestacion.equals("SI") || contestacion.equals("SÍ") || contestacion.equals("si") ||contestacion.equals("Sí")) {
+												
+					enviarCorreo();
+					
+				} else if (contestacion.equals("No") || contestacion.equals("NO") || contestacion.equals("no")) {
+					
+					System.out.println("De acuerdo.");
+				}
+				
+			}
+			
 		}
 		
 		return "Lista de correos mostrada";		
 	}
 	
-	public String borrarBandeja(ArrayList<Correo> bandejaSalida) {
+	public static String borrarBandeja(ArrayList<Correo> bandejaSalida) {
 		
 		bandejaSalida.clear();
 		
